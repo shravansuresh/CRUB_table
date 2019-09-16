@@ -1,0 +1,18 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+  }
+  
+  body {
+	margin: 0;
+	font-family: "sans-serif";
+	background-image:url('../images/back10.gif');
+	background-size: auto auto;
+	align-items: center;
+  }
+  .logo{
+    height: 40px;
+    width:auto;
+  }
+  .pinkFloyd{
+    text-align: center;
+  }

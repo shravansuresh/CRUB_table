@@ -1,0 +1,81 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+  }
+  
+  body {
+	margin: 0;
+	font-family: "sans-serif";
+	background-size: auto auto;
+	align-items: center;
+  }
+
+  .header {
+	text-align: center;
+	padding: 32px;
+	color: black;
+	font-family: "Courier New";
+  }
+  .buttonImg{
+	  text-align: center;
+	  font-family: "Courier New";
+  }
+  .row {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 50px 150px;
+  }
+  
+  .column {
+	flex: 25%;
+	max-width: 25%;
+	padding: 0 4px;
+  }
+  
+  .column img {
+	width: 100%;
+	margin-top: 8px;
+	vertical-align: middle;
+	opacity: .5;
+  }
+  
+  .column img:hover{
+  opacity: 1;
+  min-width:102%;
+  }
+  
+  .container {
+	position: relative;
+	display: none;
+	text-align: center;
+	}
+  .container img{
+	  width: 70%;
+	  height: auto;
+  }
+  .closebtn {
+	  position: absolute;
+	  color: white;
+	  font-size: 35px;
+	  cursor: pointer;
+	  top: 0px;
+  }
+  .logo{
+    height: 40px;
+    width:auto;
+  }
+
+	
+  
+  @media screen and (max-width: 800px) {
+	.column {
+	  flex: 50%;
+	  max-width: 50%;
+	}
+  }
+  
+  @media screen and (max-width: 600px) {
+	.column {
+	  flex: 100%;
+	  max-width: 100%;
+	}
+  }

@@ -1,0 +1,100 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+  }
+  
+  body {
+	margin: 0;
+	font-family: "sans-serif";
+  }
+  #tableDisplay {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #tableDisplay td, #tableDisplay th {
+    border: 1px solid rgb(221, 221, 221);
+    padding: 8px;
+  }
+  
+#tableId{
+  width: 70%;
+}
+  
+  #tableDisplay th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(76, 175, 80);
+    color: white;
+  }
+  .dltBtn{
+  }
+  .addBtn{
+    height: 30px; 
+    width: auto;
+    display: flex;
+    justify-content: center;  
+  }
+  .sortBtn{ 
+    height: 20px;
+    width: 20px;
+    float: right;
+  }
+  .container{
+    position: relative;
+  }
+  .btn-group{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .logo{
+    height: 40px;
+    width:auto;
+  }
+  .modalHeader {
+    padding: 2px 16px;
+    background-color: #343a40;
+    color: white;
+  }
+
+  .modalBody {padding: 40px 16px;}
+  
+  .modalFooter {
+    padding: 2px 16px;
+    background-color: #343a40;
+    color: white;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .modalContent {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  #modalBtn{
+    height: 30px;
+  }
+  input[type="text"]{
+    width:100%;
+    margin-top:10px;
+    height:35px;
+    margin-bottom:25px;
+    padding:10px;
+    border:1px solid #343a40;
+    }
