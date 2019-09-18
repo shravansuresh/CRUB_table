@@ -1,3 +1,4 @@
+
 *, *:before, *:after {
 	box-sizing: border-box;
   }
@@ -6,46 +7,88 @@
 	margin: 0;
 	font-family: "sans-serif";
   }
-  #tableDisplay {
+  .navbar-nav{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .container{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+  }
+  .tableOp{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4%;
+    height: 96px;
+    margin-right: 11.5%;
+  }
+  
+  .tableDisplay {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     display: flex;
     justify-content: center;
+    height: 300px;
+    overflow: auto;
   }
-  
+
   #tableDisplay td, #tableDisplay th {
     border: 1px solid rgb(221, 221, 221);
     padding: 8px;
   }
-  
-#tableId{
-  width: 70%;
-}
+  #tableId{
+    width: 100%;
+
+    
+  }
   
   #tableDisplay th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: rgb(76, 175, 80);
-    color: white;
+    background-color: rgba(128, 128, 128, 0.664);
+    color: rgb(0, 0, 0);
   }
-  .dltBtn{
+  .Btn{
+    background-color: white;
+    border: none; 
+    color: white; 
+    margin: 1px;
+    padding: 5px 4px; 
+    cursor: pointer;
   }
+
   .addBtn{
-    height: 30px; 
-    width: auto;
+    border:none;
+    background-color: white;
+    height: 50px; 
+    width: 50px;
     display: flex;
     justify-content: center;  
   }
+
+  img.addBtn{
+    padding: 5px;
+  }
+
   .sortBtn{ 
-    height: 20px;
-    width: 20px;
-    float: right;
+    background-color: rgba(128, 128, 128, 0.0);
+    border: none; 
+    color: white; 
+    margin: 5px;
+    padding: 8px 16px;
+    font-size: 16px; 
+    cursor: pointer;
   }
-  .container{
-    position: relative;
-  }
+
   .btn-group{
     display: flex;
     justify-content: space-evenly;
@@ -54,47 +97,122 @@
     height: 40px;
     width:auto;
   }
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+  
   .modalHeader {
-    padding: 2px 16px;
-    background-color: #343a40;
-    color: white;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    background-color: #ccc;
+    padding: 16px;
   }
 
-  .modalBody {padding: 40px 16px;}
+  button:hover {
+    opacity: 0.8;
+  }
   
-  .modalFooter {
-    padding: 2px 16px;
-    background-color: #343a40;
-    color: white;
-    height: 50px;
-    display: flex;
-    justify-content: center;
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  
+  .modalBody{
+    padding: 16px;
+  }
+  
+  
+  .formModal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
   }
   
   .modalContent {
-    position: relative;
     background-color: #fefefe;
-    margin: auto;
-    padding: 0;
+    margin: 5% auto 15% auto; 
     border: 1px solid #888;
-    width: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s
+    width: 30%;
+    box-shadow: 8px 15px #6b6b6b9f;
   }
   
-  @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
   }
-  #modalBtn{
-    height: 30px;
+  
+  .close:hover {
+    color: rgb(197, 35, 35);
+    cursor: pointer;
   }
-  input[type="text"]{
-    width:100%;
-    margin-top:10px;
-    height:35px;
-    margin-bottom:25px;
-    padding:10px;
-    border:1px solid #343a40;
+
+  .submitBtn {
+    background-color: rgb(76, 175, 80);
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+  }
+  
+  .clearBtn{
+    background-color: rgb(255, 238, 0);
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+  }
+
+  .modalFooter{
+    display:flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+    .clearBtn, 
+    .submitBtn {
+       width: 100%;
     }
+    #searchTable{
+      width: 100%;
+    }
+  }
+
+  .footer{
+    background-color: #343a40;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width:100%;
+    height: 50px;
+  }
+  .footerText{
+    text-align: center;
+    padding: 13px;
+  }
