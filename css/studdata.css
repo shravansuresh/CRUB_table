@@ -40,20 +40,20 @@
     overflow: auto;
   }
 
-  #tableDisplay td, #tableDisplay th {
+  #tableDisplay td {
     border: 1px solid rgb(221, 221, 221);
     padding: 8px;
+    text-align: center;
   }
   #tableId{
     width: 100%;
-
-    
   }
   
   #tableDisplay th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
+    border: 1px solid rgb(221, 221, 221);
     background-color: rgba(128, 128, 128, 0.664);
     color: rgb(0, 0, 0);
   }
@@ -98,7 +98,7 @@
     width:auto;
   }
 
-  input {
+  input{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -192,17 +192,6 @@
     justify-content: center;
     padding: 20px;
   }
-  
-  
-  @media screen and (max-width: 600px) {
-    .clearBtn, 
-    .submitBtn {
-       width: 100%;
-    }
-    #searchTable{
-      width: 100%;
-    }
-  }
 
   .footer{
     background-color: #343a40;
@@ -215,4 +204,13 @@
   .footerText{
     text-align: center;
     padding: 13px;
+  }
+  @media screen and (max-width: 600px) {
+    .clearBtn, 
+    .submitBtn {
+       width: 100%;
+    }
+    #searchTable{
+      width: 100%;
+    }
   }

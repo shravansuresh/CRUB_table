@@ -1,5 +1,7 @@
 let studThead = ["Roll No", "Name", "Email", "Phone Number"];
 let studTtype = ["number", "text", "email", "number" ];
+let empThead = ["Emp Id", "Name", "Date of Birth", "Email"];
+let empTtype = ["number", "text", "date", "email"];
 let tableId = document.createElement("table");
 tableId.setAttribute("id", "tableId");
 function createTable(tableArr, storageId){
@@ -9,55 +11,46 @@ function createTable(tableArr, storageId){
         let th = document.createElement("th");
         th.setAttribute("class", "tHead");
         let ascBtn = document.createElement("BUTTON"); 
-        //let dscBtn = document.createElement("BUTTON"); 
         th.innerHTML = element;
         ascBtn.setAttribute("class", "sortBtn");
-        ascBtn.innerHTML = '<img src="up.png" width="15px" height="auto">';
+        ascBtn.innerHTML = '<img src="../images/up.png" width="15px" height="auto">';
         ascBtn.setAttribute('id', element);
-        ascBtn.setAttribute("onclick", "sortRow(this, 'asc')");
+        ascBtn.addEventListener("click", function(event) {
+            sortRow(this, 'asc', headArr, storageId);
+            event.preventDefault();
+        });
         th.appendChild(ascBtn);
-        //dscBtn.setAttribute("class", "sortBtn");
-        //dscBtn.innerHTML = '<img src="sort.png" width="30px" height="auto">'
-        //dscBtn.setAttribute('id', element);
-        //dscBtn.setAttribute("onclick", "sortRow(this)");
-        //th.appendChild(dscBtn);
         tr.appendChild(th);
     });
+    let tableData = retrieveFromStorage(storageId);
     let div = document.getElementById("tableDisplay");
     div.appendChild(tableId);
-    let tableData = retrieveFromStorage(storageId);
-    tableData.forEach(function(item){
-        let tr = tableId.insertRow(-1);
-        for (let [key, value] of Object.entries(item)) {
-            let td = document.createElement("td");
-            td.innerHTML = value;
-            tr.appendChild(td);
-        }
-        let editBtn = document.createElement("BUTTON");
-        editBtn.setAttribute("class", "Btn");
-        editBtn.innerHTML = '<img src="edit.png" width="30px" height="30px">';
-        editBtn.setAttribute("onclick", "editRow(this, studThead, 'studArry')");
-        tr.appendChild(editBtn);
-        let dltBtn = document.createElement("BUTTON");
-        dltBtn.setAttribute("class", "Btn");
-        dltBtn.innerHTML = '<img src="delete.png" width="30px" height="30px">';
-        dltBtn.setAttribute("onclick", "dltRow(this, 'studArry')");
-        tr.appendChild(dltBtn);
-       /* let saveBtn = document.createElement("BUTTON");
-        saveBtn.setAttribute("class", "saveBtn");
-        saveBtn.innerHTML = "Save";
-        saveBtn.setAttribute("onclick", "");
-        tr.appendChild(saveBtn);
-        let cancelBtn = document.createElement("BUTTON");
-        cancelBtn.setAttribute("class", "cancelBtn");
-        cancelBtn.innerHTML = "edit";
-        cancelBtn.setAttribute("onclick", "");
-        tr.appendChild(cancelBtn);
-        */
-    });
-    //document.getElementsByClassName('saveBtn').style.display = 'none';
-    //document.getElementsByClassName('cancelBtn').style.display = 'none'; 
-
+    if(tableData != null){
+        tableData.forEach(function(item){
+            let tr = tableId.insertRow(-1);
+            for (let [key, value] of Object.entries(item)) {
+                let td = document.createElement("td");
+                td.innerHTML = value;
+                tr.appendChild(td);
+            }
+            let editBtn = document.createElement("BUTTON");
+            editBtn.setAttribute("class", "Btn");
+            editBtn.innerHTML = '<img src="../images/edit.png" width="30px" height="30px">';
+            editBtn.addEventListener("click", function(event) {
+                editRow(this, headArr, storageId);
+                event.preventDefault();
+            });
+            tr.appendChild(editBtn);
+            let dltBtn = document.createElement("BUTTON");
+            dltBtn.setAttribute("class", "Btn");
+            dltBtn.innerHTML = '<img src="../images/delete.png" width="30px" height="30px">';
+            dltBtn.addEventListener("click", function(event) {
+                dltRow(this, storageId);
+                event.preventDefault();
+            });
+            tr.appendChild(dltBtn);
+        });
+    }
 }
 
 function handleForm(storageId, tableArr){
@@ -91,15 +84,21 @@ function formValidation(headArr, storageId){
     let tableData = retrieveFromStorage(storageId);
     headArr.forEach(function(item){
         let formValue = document.forms["formData"][item].value;
-        tableData.forEach(function(element){
-            for (let [key, value] of Object.entries(element)) {
-                if(formValue == value){
-                    alert(item+" already exist");
-                    flag=1;
+        if(tableData != null){
+            tableData.forEach(function(element){
+                for (let [key, value] of Object.entries(element)) {
+                    if(formValue == value){
+                        alert(item+" already exist");
+                        flag=1;
+                    }
                 }
-            }
-        });
-        if (formValue == "") {
+            });
+        }
+        else{
+            flag = 0;
+        }
+        let date = new Date();
+        if (formValue == "" || formValue < 0 || formValue > date) {
             alert(item+" must be filled out");
             return false;
         }
@@ -113,20 +112,25 @@ function formValidation(headArr, storageId){
 function clearForm(){
     document.getElementById("formData").reset();
 }
-function addRow(tableArr){
+function addRow(tableArr, type){
     let headArr = tableArr;
-    let inputType = studTtype;
+    let inputType = type;
     let i = 0;
     let form = document.createElement("FORM");
     form.setAttribute("type", "text");
     form.setAttribute("id", "formData");
     document.getElementById("modalBody").appendChild(form);
     headArr.forEach(function(element){
+        debugger
         let label = document.createElement("LABEL");
         label.innerHTML = element;
         form.appendChild(label);
         let input = document.createElement("INPUT");
         input.setAttribute("type", inputType[i]);
+        if(inputType[i] == "date"){
+            input.setAttribute("max", "2000-12-31");
+            //input.setAttribute("min", "2000-01-01");
+        }
         input.setAttribute("id", element);
         form.appendChild(input);
         let lineBreak = document.createElement('br');
@@ -138,13 +142,11 @@ function addRow(tableArr){
     modal.style.display ="block";
     var span =document.getElementsByClassName("close")[0];
     span.onclick = function(){ 
-        //modal.style.display="none";
-        //document.getElementById("tableId").style.display = "";
         window.location.reload();
     }
     window.onclick = function(event) {
         if (event.target == modal) {
-          modal.style.display = "none";
+            window.location.reload();
         }
     }  
 }
@@ -168,33 +170,53 @@ function dltRow(dltBtn, storageId){
 }
 
 function editRow(editBtn, headArr, storageId){
-    let Arr = studThead;
     let rowIndex = editBtn.parentNode.rowIndex;
     let rows = document.getElementById("tableId").rows;
-    if(rows[rowIndex].cells[0].contentEditable == "false"){
-        Arr.forEach(function(item, index){
-            rows[rowIndex].cells[index].contentEditable = "true";
-            rows[rowIndex].cells[index].style.backgroundColor = "lightgrey";    
-        }); 
-        editBtn.innerHTML = '<img src="save.jpg" width="30px" height="30px">';
-    }
-    else{
-        Arr.forEach(function(item, index){
+    if(rows[rowIndex].cells[0].contentEditable == "true"){
+        editBtn.innerHTML = '<img src="../images/edit.png" width="30px" height="30px">';
+        headArr.forEach(function(item, index){
             rows[rowIndex].cells[index].contentEditable = "false";
             rows[rowIndex].cells[index].style.backgroundColor = "white";
         }); 
-        editBtn.innerHTML = '<img src="edit.png" width="30px" height="30px">';
         let rowObj = {};
-        Arr.forEach(function(item, index){
-            rowObj[item] = rows[rowIndex].cells[index].innerText;
+        headArr.forEach(function(item, index){
+                rowObj[item] = rows[rowIndex].cells[index].innerText;
         });
-        let rowData = retrieveFromStorage('studArry');
+        let rowData = retrieveFromStorage(storageId);
         rowData.splice(rowIndex-1, 1, rowObj);
-        saveToStorage('studArry', rowData); 
+        saveToStorage(storageId, rowData);         
+    }
+    else{ 
+        editBtn.innerHTML = '<img src="../images/save.jpg" width="30px" height="30px">';
+        headArr.forEach(function(item, index){
+            rows[rowIndex].cells[index].contentEditable = "true";
+            rows[rowIndex].cells[index].style.backgroundColor = "#E0E0E0";   
+        });
+        rows[rowIndex].cells[0].focus();
     }
 }
+function editRowValidation(rowIndex){
+    let rows = document.getElementById("tableId").rows;
+    let typeArr = studTtype;
+    typeArr.forEach(function(type, index){
+        if(type == "number"){
+            if(isNaN(rows[rowIndex].cells[index].innerText)){
+                alert("Invalid Input");
+            }
+        }
+        else if(type == "text"){
 
-function sortRow(sortBtn, sort){
+        }
+        else if(type == "date"){
+
+        }
+        else if(type == "email"){
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailPattern.test(rows[rowIndex].cells[index].innerText); 
+        }
+    });
+}
+function sortRow(sortBtn, sort, tableArr, storageId){
     const thKey = sortBtn.getAttribute('id');
     let cellIndex = (sortBtn.parentNode.cellIndex);
     let rows = document.getElementById("tableId").rows;
@@ -225,19 +247,35 @@ function sortRow(sortBtn, sort){
             switching = true; 
         } 
     }
+    let newTableData = [];
+    let outerIndex;
+    for(outerIndex = 1; outerIndex < rows.length; outerIndex++){
+        let rowObj = {};
+        tableArr.forEach(function(element, innerIndex){
+            rowObj[element] = rows[outerIndex].cells[innerIndex].innerText;
+        });
+        newTableData[outerIndex-1] = rowObj;
+    }
+    saveToStorage(storageId, newTableData);
+
     let btn = document.getElementById(thKey);
     if(sort == 'asc'){
         btn.setAttribute("onclick", null);
-        btn.innerHTML = '<img src="down.png" width="15px" height="auto">';
-        btn.setAttribute("onclick", "sortRow(this, 'dsc')");
+        btn.innerHTML = '<img src="../images/down.png" width="15px" height="auto">';
+        btn.addEventListener("click", function(event) {
+            sortRow(this, 'dsc', tableArr, studThead);
+            event.preventDefault();
+        });
     } 
     if(sort == 'dsc'){
         btn.setAttribute("onclick", null);
-        btn.innerHTML = '<img src="up.png" width="15px" height="auto">';
-        btn.setAttribute("onclick", "sortRow(this, 'asc')");
+        btn.innerHTML = '<img src="../images/up.png" width="15px" height="auto">';
+        btn.addEventListener("click", function(event) {
+            sortRow(this, 'asc', tableArr, studThead);
+            event.preventDefault();
+        });
     }
-    
-}
+}   
 
 function searchTable(storageId){
     let input = document.getElementById("searchTable").value;
@@ -249,30 +287,19 @@ function searchTable(storageId){
     tableData.forEach(function(item, index){
         let flag =0;
         for (let [key, value] of Object.entries(item)) {
-            if(value.toUpperCase().search(filter) > -1){
+            if(value.toUpperCase().indexOf(filter) > -1){
                 flag = 1;
+                console.log(value);
             }
         }
         if (flag == 1) {
-            tr[index].style.display = "";
+            tr[index+1].style.display = "";
         }   
         else {
-            tr[index].style.display = "none";
+            tr[index+1].style.display = "none";
         }
     });
     
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            }   
-            else {
-                tr[i].style.display = "none";
-        }
-    }       
-  }
 }
 function saveToStorage(storageId, data){
     let storingData = JSON.stringify(data);

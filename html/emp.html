@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Student Database</title>
-<link rel="stylesheet" type="text/css" href="css/studdata.css">
+<title>Employee Database</title>
+<link rel="stylesheet" type="text/css" href="../css/studdata.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -23,28 +23,28 @@
 <body>
 <div class="bs-example">
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-        <a href="#" class="navbar-brand"><img class="logo" src="images/insta.png"></a>
+        <a href="#" class="navbar-brand"><img class="logo" src="../images/insta.png"></a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse1">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav">
-                <a href="index.html#" class="nav-item nav-link">Home</a>
+                <a href="../index.html#" class="nav-item nav-link">Home</a>
                 <a href="picgallery.html#" class="nav-item nav-link">Gallery</a>
-                <a href="stud.html" class="nav-item nav-link active">Student Info</a>
-                <a href="empdata.html" class="nav-item nav-link">Employee Info</a>
+                <a href="stud.html" class="nav-item nav-link ">Student Info</a>
+                <a href="emp.html" class="nav-item nav-link active">Employee Info</a>
             </div>
         </div>
     </nav>
 </div>
 
 <div class="container">
-        <h4>Student Table</h4>
+        <h4>Employee Table</h4>
     <div class="tableOp" >
-            <button type="button" class="addBtn" id="addBtn" onclick="addRow(studThead)"><img src="addicon.png" class="addBtn"></button>
+            <button type="button" class="addBtn" id="addBtn" onclick="addRow(empThead, empTtype)"><img src="../images/addicon.png" alt="add row" class="addBtn"></button>
     <div class="active-purple-3 active-purple-4 mb-4">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchTable"  onkeyup='searchTable("studArry")' >
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchTable"  onkeyup='searchTable("empArry")' >
     </div>
     </div>
 
@@ -62,7 +62,7 @@
             
             </div>
             <div class="modalFooter">
-                <button type="button" id="modalBtn" onclick= 'handleForm("studArry", studThead)' class="submitBtn">Submit</button>
+                <button type="button" id="modalBtn" onclick= 'handleForm("empArry", empThead)' class="submitBtn">Submit</button>
                 <button type="button" id="modalBtn" onclick= 'clearForm()' class="clearBtn">Clear</button>
             </div>
         </div>
@@ -72,12 +72,12 @@
 
 <footer class="footer">
     <div class="footerText">© 2019 Copyright:
-        <a href="#"> Qburst.com</a>
+        <a href="../index.html#"> Qburst.com</a>
     </div>
 </footer>
-<script type="text/javascript" src="studEmp.js"></script>
+<script type="text/javascript" src="../js/studEmp.js"></script>
 <script>
-    createTable(studThead, "studArry");
+    createTable(empThead, "empArry");
 </script>
 </body>
 </html>
