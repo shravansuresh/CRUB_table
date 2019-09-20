@@ -7,7 +7,7 @@ tableId.setAttribute("id", "tableId");
 function createTable(tableArr, storageId){
     let headArr = tableArr;
     let tr = tableId.insertRow(0);
-    headArr.forEach(function(element) {
+    headArr.forEach(element => {
         let th = document.createElement("th");
         th.setAttribute("class", "tHead");
         let ascBtn = document.createElement("BUTTON"); 
@@ -55,7 +55,7 @@ function createTable(tableArr, storageId){
 
 function handleForm(storageId, tableArr){
     let headArr = tableArr;
-    if(formValidation(headArr, storageId).count == headArr.length && formValidation(headArr, storageId).flag ==0){
+    if(formValidation(headArr) == headArr.length){
         let data = [];
         let rowObj = {};
         let i =0;
@@ -78,35 +78,79 @@ function handleForm(storageId, tableArr){
     }
 }
 
-function formValidation(headArr, storageId){
+function formValidation(headArr){
+    let typeArr;
+    if(headArr == studThead){
+        typeArr = studTtype;
+    }
+    else{
+        typeArr = empTtype
+    }
     let count = 0;
     let flag = 0;
-    let tableData = retrieveFromStorage(storageId);
-    headArr.forEach(function(item){
+    headArr.forEach(function(item, index){
+        type = typeArr[index];
         let formValue = document.forms["formData"][item].value;
-        if(tableData != null){
-            tableData.forEach(function(element){
-                for (let [key, value] of Object.entries(element)) {
-                    if(formValue == value){
-                        alert(item+" already exist");
-                        flag=1;
-                    }
+        if(formValue == 0 ){
+            alert(item+" field empty");
+        }
+        else if(type == "number"){
+            if(isNaN(formValue)){
+                alert("Invalid "+item);
+            }
+            else if(formValue < 0){
+                alert("Invalid "+item);
+            }
+            else{
+                if(formUniqueChecker(formValue, index) == 1)
+                {
+                    alert(item+" already exist");
                 }
-            });
+                else{
+                    count++;
+                }
+            }
         }
-        else{
-            flag = 0;
+        else if(type == "text"){
+            let namePattern = /^[a-zA-Z]+$/;
+            
+            if(namePattern.test(formValue) === true){
+                count++;
+            }
+            else{
+                alert(item+" must be in alphabets only");
+            }
         }
-        let date = new Date();
-        if (formValue == "" || formValue < 0 || formValue > date) {
-            alert(item+" must be filled out");
-            return false;
-        }
-        else{
-            count++;
+        else if(type == "email"){
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if(emailPattern.test(formValue) === true){
+                if(formUniqueChecker(formValue, index) == 1)
+                {
+                    alert(item+" already exist");
+                }
+                else{
+                    count++;
+                }
+                
+            } 
+            else{
+                alert("Invalid Email");
+            }
         }
     });
-    return {count, flag};
+    return count;
+}
+
+function formUniqueChecker(value, colIndex){
+    let index;
+    let rows = document.getElementById("tableId").rows;
+    let unique = 0;
+    for(index=0; index < rows.length; index++){
+        if(value == rows[index].cells[colIndex].innerText) {
+            unique = 1;
+            return unique;
+        }
+    } 
 }
 
 function clearForm(){
@@ -121,7 +165,6 @@ function addRow(tableArr, type){
     form.setAttribute("id", "formData");
     document.getElementById("modalBody").appendChild(form);
     headArr.forEach(function(element){
-        debugger
         let label = document.createElement("LABEL");
         label.innerHTML = element;
         form.appendChild(label);
@@ -129,7 +172,6 @@ function addRow(tableArr, type){
         input.setAttribute("type", inputType[i]);
         if(inputType[i] == "date"){
             input.setAttribute("max", "2000-12-31");
-            //input.setAttribute("min", "2000-01-01");
         }
         input.setAttribute("id", element);
         form.appendChild(input);
@@ -170,21 +212,34 @@ function dltRow(dltBtn, storageId){
 }
 
 function editRow(editBtn, headArr, storageId){
+    let typeArr;
+    if(headArr === studThead)
+    {
+        typeArr = studTtype;
+    }
+    else{
+        typeArr = empTtype;
+    }
     let rowIndex = editBtn.parentNode.rowIndex;
     let rows = document.getElementById("tableId").rows;
     if(rows[rowIndex].cells[0].contentEditable == "true"){
-        editBtn.innerHTML = '<img src="../images/edit.png" width="30px" height="30px">';
-        headArr.forEach(function(item, index){
-            rows[rowIndex].cells[index].contentEditable = "false";
-            rows[rowIndex].cells[index].style.backgroundColor = "white";
-        }); 
-        let rowObj = {};
-        headArr.forEach(function(item, index){
+        if(editRowValidation(rowIndex, typeArr, headArr) == headArr.length){
+            editBtn.innerHTML = '<img src="../images/edit.png" width="30px" height="30px">';
+            headArr.forEach(function(item, index){
+                rows[rowIndex].cells[index].contentEditable = "false";
+                rows[rowIndex].cells[index].style.backgroundColor = "white";
+            }); 
+            let rowObj = {};
+            headArr.forEach(function(item, index){
                 rowObj[item] = rows[rowIndex].cells[index].innerText;
-        });
-        let rowData = retrieveFromStorage(storageId);
-        rowData.splice(rowIndex-1, 1, rowObj);
-        saveToStorage(storageId, rowData);         
+            });
+            let rowData = retrieveFromStorage(storageId);
+            rowData.splice(rowIndex-1, 1, rowObj);
+            saveToStorage(storageId, rowData);
+        } 
+        else{
+            rows[rowIndex].cells[0].focus();
+        }        
     }
     else{ 
         editBtn.innerHTML = '<img src="../images/save.jpg" width="30px" height="30px">';
@@ -195,26 +250,78 @@ function editRow(editBtn, headArr, storageId){
         rows[rowIndex].cells[0].focus();
     }
 }
-function editRowValidation(rowIndex){
+function editRowValidation(rowIndex, typeArr, headArr){
     let rows = document.getElementById("tableId").rows;
-    let typeArr = studTtype;
+    let count = 0;
     typeArr.forEach(function(type, index){
         if(type == "number"){
             if(isNaN(rows[rowIndex].cells[index].innerText)){
-                alert("Invalid Input");
+                alert("Invalid "+headArr[index]);
+                return false;
+            }
+            else if(rows[rowIndex].cells[index].innerText < 0)
+            {
+                alert("Invalid "+headArr[index]);
+                return false;
+            }
+            else{
+                if(editUniqueChecker(rows[rowIndex].cells[index].innerText, index, rowIndex) == 1)
+                {
+                    alert(headArr[index]+" already exist");
+                }
+                else{
+                    count++;
+                }
             }
         }
         else if(type == "text"){
-
+            let namePattern = /^[a-zA-Z]+$/;
+            
+            if(namePattern.test(rows[rowIndex].cells[index].innerText) === true){
+                count++;
+            }
+            else{
+                alert(headArr[index]+" must be in alphabets only");
+            }
         }
         else if(type == "date"){
-
+            if(rows[rowIndex].cells[index].innerText < "2000-12-31"){
+                count++;
+            }
+            else{
+                alert("Enter valid date")
+            }
         }
         else if(type == "email"){
             let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            return emailPattern.test(rows[rowIndex].cells[index].innerText); 
+            if(emailPattern.test(rows[rowIndex].cells[index].innerText) === true){
+                if(editUniqueChecker(rows[rowIndex].cells[index].innerText, index, rowIndex) == 1)
+                {
+                    alert(headArr[index]+" already exist");
+                }
+                else{
+                    count++;
+                }
+                
+            } 
+            else{
+                alert("Invalid "+headArr[index]);
+            }
         }
     });
+    return count;
+}
+
+function editUniqueChecker(value, colIndex, rowIndex){
+    let index;
+    let rows = document.getElementById("tableId").rows;
+    let unique = 0;
+    for(index=0; index < rows.length; index++){
+        if(index !== rowIndex && value == rows[index].cells[colIndex].innerText) {
+            unique = 1;
+            return unique;
+        }
+    } 
 }
 function sortRow(sortBtn, sort, tableArr, storageId){
     const thKey = sortBtn.getAttribute('id');
