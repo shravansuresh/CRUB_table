@@ -22,8 +22,10 @@ function createTable(tableArr, storageId){
         th.appendChild(ascBtn);
         tr.appendChild(th);
     });
+    debugger
     let tableData = retrieveFromStorage(storageId);
     let div = document.getElementById("tableDisplay");
+    div.style.width = "88.5%";
     div.appendChild(tableId);
     if(tableData != null){
         tableData.forEach(function(item){
@@ -49,6 +51,7 @@ function createTable(tableArr, storageId){
                 event.preventDefault();
             });
             tr.appendChild(dltBtn);
+            div.style.width = "101.9%";
         });
     }
 }
@@ -112,7 +115,7 @@ function formValidation(headArr){
             }
         }
         else if(type == "text"){
-            let namePattern = /^[a-zA-Z]+$/;
+            let namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*/;
             
             if(namePattern.test(formValue) === true){
                 count++;
@@ -200,6 +203,7 @@ function displayTable(storageId, tableArr){
 }
 
 function dltRow(dltBtn, storageId){
+    debugger
     if (confirm("Confim Deletion?") == true) {
         let tableId = document.getElementById("tableId");
         let rowIndex = (dltBtn.parentNode.rowIndex)-1;
@@ -207,8 +211,10 @@ function dltRow(dltBtn, storageId){
         tableData.splice(rowIndex, 1);
         tableId.deleteRow(dltBtn.parentNode.rowIndex);
     saveToStorage(storageId, tableData);
-    } 
-    
+    if(tableData.length == 0){
+        window.location.reload();
+    }    
+    }  
 }
 
 function editRow(editBtn, headArr, storageId){
@@ -275,7 +281,7 @@ function editRowValidation(rowIndex, typeArr, headArr){
             }
         }
         else if(type == "text"){
-            let namePattern = /^[a-zA-Z]+$/;
+            let namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*/;
             
             if(namePattern.test(rows[rowIndex].cells[index].innerText) === true){
                 count++;
