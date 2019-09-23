@@ -16,9 +16,9 @@
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-    justify-content: space-between;
-    font-size: larger;
+    font-size: 17px;
   }
+   
   .container{
     width: 100%;
     padding-right: 10px;
@@ -42,6 +42,7 @@
     justify-content: center;
     height: 300px;
     overflow: auto;
+    margin-bottom: 80px;  
   }
 
   #tableDisplay td {
@@ -201,7 +202,7 @@
     background-color: #343a40;
     width: 100%;
     position: fixed;
-    height: 30px;
+    height: 6 0px;
     bottom: 0;
     left: 0;
 }

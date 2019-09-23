@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Image Gallery</title>
+	<title>Photo Gallery</title>
     <link rel="stylesheet" type="text/css" href="../css/gallery.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
@@ -17,7 +17,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="images.js"></script>
+    <script src="../js/images.js"></script>
     <script>
             $(document).ready(function(){
               $("button").click(function(){
@@ -48,10 +48,13 @@
             <div class="navbarList" id="navbarCollapse1">
                 <div class="navbar-nav">
                     <a href="../index.html#" class="nav-item nav-link">Home</a>
-                    <a href="picgallery.html#" class="nav-item nav-link active">Gallery</a>
+                    <a href="picgallery.html#" class="nav-item nav-link active">Photo Gallery</a>
                     <a href="stud.html" class="nav-item nav-link">Student Info</a>
-                    <a href="empdata.html" class="nav-item nav-link">Employee Info</a>
+                    <a href="emp.html" class="nav-item nav-link">Employee Info</a>
                 </div>
+            </div>
+            <div>
+                    <button type="button" class="btn btn-success">Sign in</button>        
             </div>
         </nav>
     </div>
@@ -94,12 +97,12 @@
     var i;
     var col;
     var atag,imgsrc,div,k;
-    for(var i=0,col=1; i<image.images.length;i++)
+    for(var i=0,col=1; i< image.images[i] ;i++)
     {   
         atag=document.createElement("a");
         atag.setAttribute('href',"#");
         imgsrc =document.createElement("IMG");
-        imgsrc.setAttribute('src',"../image.images[i]");
+        imgsrc.setAttribute('src',"../js/images.js/image.images.[i]");
         imgsrc.setAttribute('onclick',"ImgView(this);")
         atag.appendChild(imgsrc);
         k="col"+col;
