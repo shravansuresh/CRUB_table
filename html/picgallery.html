@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Image Gallery</title>
-    <link rel="stylesheet" type="text/css" href="css/gallery.css">
+    <link rel="stylesheet" type="text/css" href="../css/gallery.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -40,14 +40,14 @@
 <body>
     <div class="bs-example">
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-            <a href="#" class="navbar-brand"><img class="logo" src="images/insta.png"></a>
+            <a href="#" class="navbar-brand"><img class="logo" src="../images/insta.png"></a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse1">
                 <span class="navbar-toggler-icon"></span>
             </button>
     
             <div class="collapse navbar-collapse" id="navbarCollapse1">
                 <div class="navbar-nav">
-                    <a href="index.html#" class="nav-item nav-link">Home</a>
+                    <a href="../index.html#" class="nav-item nav-link">Home</a>
                     <a href="picgallery.html#" class="nav-item nav-link active">Gallery</a>
                     <a href="stud.html" class="nav-item nav-link">Student Info</a>
                     <a href="empdata.html" class="nav-item nav-link">Employee Info</a>
@@ -99,7 +99,7 @@
         atag=document.createElement("a");
         atag.setAttribute('href',"#");
         imgsrc =document.createElement("IMG");
-        imgsrc.setAttribute('src',image.images[i]);
+        imgsrc.setAttribute('src',"../image.images[i]");
         imgsrc.setAttribute('onclick',"ImgView(this);")
         atag.appendChild(imgsrc);
         k="col"+col;
