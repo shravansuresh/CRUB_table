@@ -1,0 +1,53 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+  }
+  
+  body {
+	margin: 0;
+	font-family: "sans-serif";
+	background-size: auto auto;
+	align-items: center;
+  }
+  .navbarList{
+    display:flex;
+    width: 88.5%;
+
+  }
+  .navbar-nav{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: space-between;
+    font-size: larger;
+  }
+  .container{
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 25px;
+    margin-top: 60px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .logo{
+    height: 40px;
+    width:auto;
+  }
+  .images{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 14px;
+    padding-right: 42px;
+    margin-top: 20px; 
+  }
+  .footer{
+    background-color: #343a40;
+    width: 100%;
+    position: relative;
+    height: auto;
+    margin-top: 82px;
+    margin-bottom: 0;
+}
+  .footerText{
+    text-align: center;
+    padding: 13px;
+  }

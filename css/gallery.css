@@ -15,6 +15,20 @@
 	color: black;
 	font-family: "Courier New";
   }
+   
+  .navbarList{
+    display:flex;
+    width: 88.5%;
+
+  }
+  .navbar-nav{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: space-between;
+    font-size: larger;
+  }
+  
   .buttonImg{
 	  text-align: center;
 	  font-family: "Courier New";
