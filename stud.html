@@ -38,25 +38,43 @@
         </div>
     </nav>
 </div>
-<div>
-    <h6>Student Info</h6>
-</div>
-<div id="formModal" class="formModal" style="display:none">
-    <div class="modalContent">
-        <div class="modalHeader">
-            <span class="close">&times;</span>
-            <h6>Please Fill the Fields</h6>
-        </div>
-        <div class="modalBody" id="modalBody">
-        </div>
-        <div class="modalFooter">
-            <button type="button" id="modalBtn" onclick= 'handleForm("studArry", studThead)' class="btn btn-success">Submit</button>
+
+<div class="container">
+        <h4>Student Table</h4>
+    <div class="tableOp" >
+            <button type="button" class="addBtn" id="addBtn" onclick="addRow(studThead)"><img src="addicon.png" class="addBtn"></button>
+    <div class="active-purple-3 active-purple-4 mb-4">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchTable"  onkeyup='searchTable("studArry")' >
+    </div>
+    </div>
+
+    <div class="tableDisplay" id="tableDisplay">
+    </div>
+
+    <div id="formModal" class="formModal" style="display:none">
+        <div class="modalContent">
+            <div class="modalHeader">
+                <span onclick="document.getElementById('formModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h5>Please Fill the Fields</h5>
+            </div>
+            
+            <div class="modalBody" id="modalBody">
+            
+            </div>
+            <div class="modalFooter">
+                <button type="button" id="modalBtn" onclick= 'handleForm("studArry", studThead)' class="submitBtn">Submit</button>
+                <button type="button" id="modalBtn" onclick= 'clearForm()' class="clearBtn">Clear</button>
+            </div>
         </div>
     </div>
 </div>
-<div class="tableDisplay" id="tableDisplay">
-    <button type="button" id="addBtn" onclick="addRow(studThead)"><img src="addicon.png" class="addBtn"></button>
-</div>
+
+
+<footer class="footer">
+    <div class="footerText">© 2019 Copyright:
+        <a href="#"> Qburst.com</a>
+    </div>
+</footer>
 <script type="text/javascript" src="studEmp.js"></script>
 <script>
     createTable(studThead, "studArry");
