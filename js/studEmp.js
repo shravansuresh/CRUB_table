@@ -26,8 +26,10 @@ function createTable(tableArr, storageId){
     let tableData = retrieveFromStorage(storageId);
     let div = document.getElementById("tableDisplay");
     div.style.width = "88.5%";
+    document.getElementById("searchTable").style.marginRight = "11.5%";
     div.appendChild(tableId);
     if(tableData != null){
+        debugger
         tableData.forEach(item => {
             let tr = tableId.insertRow(-1);
             for (let [key, value] of Object.entries(item)) {
@@ -52,11 +54,14 @@ function createTable(tableArr, storageId){
             });
             tr.appendChild(dltBtn);
             div.style.width = "101.9%";
+            document.getElementById("search").style.display="block";
+
         });
     }
 }
 
 function handleForm(storageId, tableArr){
+    debugger
     let headArr = tableArr;
     if(formValidation(headArr) == headArr.length){
         let data = [];
@@ -118,7 +123,7 @@ function formValidation(headArr){
             }
         }
         else if(type == "text"){
-            let namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*/;
+            let namePattern = /^[a-zA-Z ]*$/;
             
             if(namePattern.test(formValue) === true){
                 count++;
@@ -141,6 +146,14 @@ function formValidation(headArr){
             } 
             else{
                 alert("Invalid Email");
+            }
+        }
+        else if(type == "date"){
+            if(formValue <= "2000-12-31"){
+                count++;
+            }
+            else{
+                alert("Enter valid date")
             }
         }
     });
@@ -286,7 +299,7 @@ function editRowValidation(rowIndex, typeArr, headArr){
             }
         }
         else if(type == "text"){
-            let namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*/;
+            let namePattern = /^[a-zA-Z ]*$/;
             
             if(namePattern.test(rows[rowIndex].cells[index].innerText) === true){
                 count++;
