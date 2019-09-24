@@ -31,7 +31,7 @@
         <div class="navbarList" id="navbar">
             <div class="navbar-nav">
                 <a href="../index.html#" class="nav-item nav-link">Home</a>
-                <a href="picgallery.html#" class="nav-item nav-link">Photo Gallery</a>
+                <!--<a href="picgallery.html#" class="nav-item nav-link">Photo Gallery</a>-->
                 <a href="stud.html" class="nav-item nav-link ">Student Info</a>
                 <a href="emp.html" class="nav-item nav-link active">Employee Info</a>
             </div>
@@ -42,10 +42,10 @@
     </nav>
 </div>
 
-<div class="container">
+<div class="containerDiv">
         <h4>Employee Table</h4>
     <div class="tableOp" >
-            <button type="button" class="addBtn" id="addBtn" onclick="addRow(empThead, empTtype)"><img src="../images/addicon.png" alt="add row" class="addBtn"></button>
+            <button type="button" class="addBtn" id="addBtn" onclick="addRowModal(empThead, empTtype)"><img src="../images/addicon.png" alt="add row" class="addBtn"></button>
     <div class="active-purple-3 active-purple-4 mb-4">
         <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchTable"  onkeyup='searchTable("empArry")' >
     </div>

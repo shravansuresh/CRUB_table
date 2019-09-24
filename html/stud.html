@@ -4,12 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Student Database</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css">
 <link rel="stylesheet" type="text/css" href="../css/studdata.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <style type="text/css">
     .bs-example{
         margin: 20px;
@@ -30,7 +28,7 @@
         <div class="navbarList" id="navbar">
             <div class="navbar-nav">
                 <a href="../index.html#" class="nav-item nav-link">Home</a>
-                <a href="picgallery.html#" class="nav-item nav-link">Photo Gallery</a>
+                <!--<a href="picgallery.html#" class="nav-item nav-link">Photo Gallery</a>-->
                 <a href="stud.html" class="nav-item nav-link active">Student Info</a>
                 <a href="emp.html" class="nav-item nav-link">Employee Info</a>
             </div>
@@ -41,13 +39,13 @@
     </nav>
 </div>
 
-<div class="container">
+<div class="containerDiv">
         <h4>Student Table</h4>
     <div class="tableOp" >
-            <button type="button" class="addBtn" id="addBtn" onclick="addRow(studThead, studTtype)"><img src="../images/addicon.png" alt="add row" class="addBtn"></button>
-    <div class="active-purple-3 active-purple-4 mb-4">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchTable"  onkeyup='searchTable("studArry")' >
-    </div>
+        <button type="button" class="addBtn" id="addBtn" onclick="addRowModal(studThead, studTtype)"><img src="../images/addicon.png" alt="add row" class="addBtn"></button>
+        <div class="active-purple-3 active-purple-4 mb-4" id="search">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchTable"  onkeyup='searchTable("studArry")' >
+        </div>
     </div>
 
     <div class="tableDisplay" id="tableDisplay">

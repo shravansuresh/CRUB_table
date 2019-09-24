@@ -2,11 +2,23 @@
 *, *:before, *:after {
 	box-sizing: border-box;
   }
-  
+  * {
+    margin: 0;
+    padding: 0;
+  }
   body {
 	margin: 0;
-	font-family: "sans-serif";
+  font-family: "sans-serif";
   }
+
+  .containerDiv{
+    width: 87%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .navbarList{
     display:flex;
     width: 88.5%;
@@ -19,13 +31,7 @@
     font-size: 17px;
   }
    
-  .container{
-    width: 100%;
-    padding-right: 10px;
-    padding-left: 25px;
-    margin-right: auto;
-    margin-left: auto;
-  }
+  
   .tableOp{
     display: flex;
     justify-content: space-between;
@@ -34,6 +40,10 @@
     margin-right: 11.5%;
   }
   
+  #searchTable{
+    margin-bottom: 0px;
+    vertical-align: middle;
+  }
   .tableDisplay {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -59,8 +69,14 @@
     padding-bottom: 12px;
     text-align: center;
     border: 1px solid rgb(221, 221, 221);
-    background-color: rgba(128, 128, 128, 0.664);
+    background-color: rgba(128, 128, 128, 1);
     color: rgb(0, 0, 0);
+  }
+
+  .tHead{
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
   .Btn{
     background-color: white;
@@ -140,7 +156,7 @@
   .formModal {
     display: none; 
     position: fixed; 
-    z-index: 1; 
+    z-index: 2; 
     left: 0;
     top: 0;
     width: 100%; 

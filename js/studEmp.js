@@ -104,6 +104,10 @@ function formValidation(headArr){
                 {
                     alert(item+" already exist");
                 }
+                else if(formValue < 0)
+                {
+                    alert("Invalid "+item);
+                }
                 else{
                     count++;
                 }
@@ -158,7 +162,8 @@ function formUniqueChecker(value, colIndex){
 function clearForm(){
     document.getElementById("formData").reset();
 }
-function addRow(tableArr, type){
+
+function addRowModal(tableArr, type){
     let headArr = tableArr;
     let inputType = type;
     let i = 0;
@@ -266,6 +271,10 @@ function editRowValidation(rowIndex, typeArr, headArr){
                 if(editUniqueChecker(rows[rowIndex].cells[index].innerText, index, rowIndex) == 1)
                 {
                     alert(headArr[index]+" already exist");
+                }
+                else if(rows[rowIndex].cells[index].innerText < 0)
+                {
+                    alert("Invalid "+headArr[index]);
                 }
                 else{
                     count++;
