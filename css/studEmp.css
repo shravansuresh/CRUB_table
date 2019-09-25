@@ -218,12 +218,13 @@
   }
 
   .footer{
-    background-color: #343a40;
+    height: 52px;
+    border-top: 1px solid #CECECE;
+    background: #343a40;
     width: 100%;
-    position: fixed;
-    height: 6 0px;
+    position: relative;
+    display: block;
     bottom: 0;
-    left: 0;
 }
   .footerText{
     text-align: center;

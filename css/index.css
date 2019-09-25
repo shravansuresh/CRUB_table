@@ -42,12 +42,14 @@
     margin-top: 20px; 
   }
   .footer{
-    background-color: #343a40;
+    height: 52px;
+    border-top: 1px solid #CECECE;
+    background: #343a40;
     width: 100%;
     position: relative;
-    height: auto;
-    margin-top: 82px;
-    margin-bottom: 0;
+    display: block;
+    bottom: 0;
+    margin-top:50px;
 }
   .footerText{
     text-align: center;
