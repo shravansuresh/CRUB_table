@@ -36,7 +36,6 @@ function addRowModal(tableArr, type){
 }
 
 function handleForm(storageId, tableArr){
-    debugger
     let headArr = tableArr;
     if(formValidation(headArr) == headArr.length){
         let data = [];
@@ -57,7 +56,7 @@ function handleForm(storageId, tableArr){
             saveToStorage(storageId, data);
 
         }
-        displayTable(storageId, headArr);
+        displayTable();
     }
 }
 
@@ -70,7 +69,6 @@ function formValidation(headArr){
         typeArr = empTtype
     }
     let count = 0;
-    let flag = 0;
     headArr.forEach((item, index) =>{
         type = typeArr[index];
         let formValue = document.forms["formData"][item].value;
@@ -90,8 +88,7 @@ function formValidation(headArr){
                 }
                 else{
                     count++;
-                }
-                
+                }   
             } 
             else{
                 alert("Invalid "+item);
@@ -151,8 +148,7 @@ function clearForm(){
     document.getElementById("formData").reset();
 }
 
-function displayTable(storageId, tableArr){
-    let headArr = tableArr;
+function displayTable(){
     document.getElementById("tableId").style.display = "block";
     window.location.reload();
 }

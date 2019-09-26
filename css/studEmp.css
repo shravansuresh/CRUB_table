@@ -58,7 +58,6 @@
   #tableDisplay td {
     border: 1px solid rgb(221, 221, 221);
     padding: 8px;
-    text-align: center;
   }
   #tableId{
     width: 100%;
@@ -66,7 +65,7 @@
   
   #tableDisplay th {
     padding-top: 12px;
-    padding-bottom: 12px;
+    padding-bottom: 12px; 
     text-align: center;
     border: 1px solid rgb(221, 221, 221);
     background-color: rgba(128, 128, 128, 1);
@@ -229,6 +228,7 @@
   .footerText{
     text-align: center;
     padding: 13px;
+    color: #fefefe;
   }
   @media (min-width: 992px){
 .navbar-expand-lg .navbarList {

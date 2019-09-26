@@ -109,5 +109,5 @@ function editUniqueChecker(value, colIndex, rowIndex){
             unique = 1;
             return unique;
         }
-    } 
-}
+    }
+} 

@@ -33,6 +33,17 @@ function createTable(tableArr, storageId){
             for (let [key, value] of Object.entries(item)) {
                 let td = document.createElement("td");
                 td.innerHTML = value;
+                if(isNaN(value)){
+                    if(isNaN(value.slice(0,3))){
+                        td.style.textAlign = "left";
+                    }
+                    else{
+                        td.style.textAlign = "right";
+                    }
+                }
+                else{
+                    td.style.textAlign = "right"
+                }
                 tr.appendChild(td);
             }
             let editBtn = document.createElement("BUTTON");
